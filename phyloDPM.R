@@ -494,7 +494,7 @@ thin.samples <- function (x, thin) {
   # Initialize the model parameters
   # -----------------------------------------------
   precis_param  <- alpha.par #Gamma (a.b) parameters for the precision parameter of the DP.
-  #if(is.null(precis_param)) {precis_param = c(exp(-0.033*num.sam), exp(-0.033*num.sam))} # these are the parameters of Gamma(a,b) prior on m.
+  if(is.null(precis_param)) {precis_param = c(exp(-0.033*num.sam), exp(-0.033*num.sam))} # these are the parameters of Gamma(a,b) prior on m.
   a.tau         <- tau2.par[1]  # gamma distr parameter for tau - the parameter for base measure of DP.
   b.tau         <- tau2.par[2]  
   a.beta        <- sig2.bet.par[1]  # inv-gamma parameter for sig.beta2 - the parameter for variance component of Beta.
@@ -933,7 +933,7 @@ post.est <- posterior.summary(cbind(Beta.BurnThin, sig.beta.BurnThin,m.BurnThin)
 
 # # Make posterior plots using ALL the simulated data (no thin and no burn-in)
 if(post.plots==TRUE){
-  graphs.function(cbind(Beta[,1:10],sig.beta,tau,m)) #posterior plots for parameters.
+  graphs.function(cbind(Beta)) #posterior plots for OTU effects..
 }
 
 
@@ -976,7 +976,7 @@ return(list(all.post = data.frame(post.est),
 # We create a generic user-input function called "PhyloDPM" (18/07/2019)
 #================================================
 phyloDPM <- function(pheno, otu.data, mTree, Nsim, thin=1, burnin=NULL, post.plots=FALSE, mu=0, 
-                      alpha.par=c(2,4), tau2.par=c(20,20),sig2.bet.par=c(20,15), rbf.par=0.001, saveSim=FALSE,evol.rate=10^3,...) {
+                      alpha.par=NULL, tau2.par=c(20,20),sig2.bet.par=c(20,15), rbf.par=0.001, saveSim=FALSE,evol.rate=10^3,...) {
 
   est <- phyloDPM.main(Y = pheno, Z = otu.data, mTree = mTree, tau2.par=tau2.par, sig2.bet.par=sig2.bet.par,
   			alpha.par=alpha.par, Nsim=Nsim, thin=thin, burnin=burnin, 
