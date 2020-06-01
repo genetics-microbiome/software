@@ -8,7 +8,7 @@
 # PLATFORM: Not Platform Dependent
 # 
 # PURPOSE: This script is used to analyse micobiome data. 
-#          It based on the logistic Dirichlet process random effects model.
+#          It is based on the logistic Dirichlet process random effects model.
 #          Produces Bayesian posterior estimates for OTU effects.
 
 
